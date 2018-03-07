@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "Cola.h"
+#include "TDAQueue.h"
 int main(){
-	Cola c=formar(formar(formar(nueva(),"a"),"b"),"c");
-	impLista(c);
-	c=desformar(c);
-	impLista(desformar(c));
+	Cola q=formar(formar(formar(formar(nueva(),"a"),"b"),"c"),"d");
+	impElem(primero(q));
+	q=desformar(q);
+	impElem(primero(q));
+	impElem(primero(desformar(q)));
 }
