@@ -98,7 +98,7 @@ void push(struct Stack* stack, char op){
 }
 // A utility function to check if the given character is operand
 int isOperand(char ch){
-    return (ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z');
+    return (ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z')||(ch>='0'&&ch<='9');
 }
  
 // A utility function to return precedence of a given operator
