@@ -1,6 +1,10 @@
+/*Creado por Adrian González Pardo
+Fecha de modificación: 30/04/2018
+Correo electronico:gozapaadr@gmail.com
+Licencia Creative Commons CC BY-SA*/
 #include "Cola2.h"
 #include "Cola.h"
-
+/*Función que arma una cola auxiliar a partir de la primer Cola que permite ver las transiciones*/
 Cola2 Armar(Cola q,int tam){
   int i,j,ini=0,dat=0,sigg=0,ban=0;
   Elem inicio=Elemnuevo2(),dato=Elemnuevo2(),siguiente=Elemnuevo2(),pal,pal2,pal3,centinela;

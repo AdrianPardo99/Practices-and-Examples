@@ -1,4 +1,13 @@
+/*Creado por Adrian González Pardo
+Fecha de modificación: 30/04/2018
+Correo electronico:gozapaadr@gmail.com
+Licencia Creative Commons CC BY-SA*/
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include <string.h>
 typedef char* Elem;
+/*Creación de una estructura de datos de tipo Cola*/
 typedef struct Nodo{
 	Elem dato;
 	struct Nodo *sig;
@@ -7,12 +16,18 @@ typedef struct CNodo{
 	ApNodo prim;
 	ApNodo ult;
 }*Cola;
+
+/*Creación de la funcion constructora de la Cola*/
 Cola nueva(){
 	Cola t=(Cola)malloc(sizeof(struct CNodo));
 	t->prim=t->ult=NULL;
 	return t;
 }
+
+/*Función observadora de la Cola*/
 int esNueva(Cola q){return (q->prim==NULL)&&(q->ult==NULL);}
+
+/*Función constructora numero 2 de la Cola*/
 Cola formar(Cola q,Elem e){
 	ApNodo t=(ApNodo)malloc(sizeof(struct Nodo));
 	t->dato=e;
@@ -26,7 +41,11 @@ Cola formar(Cola q,Elem e){
 	}
 	return q;
 }
+
+/*Función observadora del elemento de la cola*/
 Elem primero (Cola q){return q->prim->dato;}
+
+/*Función desdobladora de la Cola*/
 Cola desformar(Cola q){
 	if(q->prim==q->ult){
 		q->prim=q->ult=NULL;
@@ -36,8 +55,10 @@ Cola desformar(Cola q){
 	return q;
 }
 
+/*Función que permite imprimir cada dato de la Cola*/
 void impElem(Elem e){printf("%s\n",e);}
 
+/*Función recursiva que imprime los elementos de la Cola*/
 void impCola(Cola q,int i){
 	if(!esNueva(q)){
 		Cola t=(Cola)malloc(sizeof(struct CNodo));
@@ -48,6 +69,8 @@ void impCola(Cola q,int i){
 		impCola(desformar(t),i+1);
 	}
 }
+
+/*Función que mide el tamaño de la Cola*/
 int tamCola(Cola q){
 	Cola t=(Cola)malloc(sizeof(struct CNodo));
 	t->prim=q->prim;
@@ -55,8 +78,10 @@ int tamCola(Cola q){
 	return (!esNueva(q))?(1+tamCola(desformar(t))):(0);
 }
 
+/*Función que mide el tamaño del dato en este caso la cadena*/
 int tamElem(Elem e){return (*e!='\0')?(1+tamElem(e+1)):(0);}
 
+/*Función programada para un fin en el AFD*/
 Cola estadoFinal(Cola q,int i){
 	Cola t=(Cola)malloc(sizeof(struct CNodo));
 	t->prim=q->prim;
@@ -66,4 +91,16 @@ Cola estadoFinal(Cola q,int i){
 	}else{
 		return estadoFinal(desformar(t),i+1);
 	}
+}
+
+/*Función bandera que permite saber si existen comas o no en el apartado F del AFD*/
+int ElemComa(Elem e){
+	int i,ban=0;
+	for(i=0;i!=tamElem(e);i++){
+		if(*(e+i)==','){
+			ban=1;
+			break;
+		}
+	}
+	return ban;
 }

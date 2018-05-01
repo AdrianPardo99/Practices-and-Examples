@@ -1,5 +1,13 @@
+/*Creado por Adrian González Pardo
+Fecha de modificación: 30/04/2018
+Correo electronico:gozapaadr@gmail.com
+Licencia Creative Commons CC BY-SA*/
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include <string.h>
 typedef char* Elem;
-
+/*Creación de una estructura de datos de tipo Cola como auxiliar a la Cola principal*/
 typedef struct Nodo2{
 	Elem inicio,dato,siguiente;
 	struct Nodo2 *sig;
@@ -8,12 +16,18 @@ typedef struct CNodo2{
 	ApNodo2 prim;
 	ApNodo2 ult;
 }*Cola2;
+
+/*Creación de la funcion constructora de la Cola*/
 Cola2 nueva2(){
 	Cola2 t=(Cola2)malloc(sizeof(struct CNodo2));
 	t->prim=t->ult=NULL;
 	return t;
 }
+
+/*Función observadora de la Cola*/
 int esnueva2(Cola2 q){return (q->prim==NULL)&&(q->ult==NULL);}
+
+/*Función constructora numero 2 de la Cola*/
 Cola2 formar2(Cola2 q,Elem e,Elem e1,Elem e2){
 	ApNodo2 t=(ApNodo2)malloc(sizeof(struct Nodo2));
 	t->inicio=e;
@@ -30,10 +44,12 @@ Cola2 formar2(Cola2 q,Elem e,Elem e1,Elem e2){
 	return q;
 }
 
+/*Función observadora del elemento de la cola*/
 Elem inicio (Cola2 q){return q->prim->inicio;}
 Elem primero2 (Cola2 q){return q->prim->dato;}
 Elem siguiente(Cola2 q){return q->prim->siguiente;}
 
+/*Función desdobladora de la Cola*/
 Cola2 desformar2(Cola2 q){
 	if(q->prim==q->ult){
 		q->prim=q->ult=NULL;

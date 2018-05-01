@@ -1,12 +1,15 @@
-#include <stdlib.h>
-#include <ctype.h>
-#include <string.h>
+/*Creado por Adrian González Pardo
+Fecha de modificación: 30/04/2018
+Correo electronico:gozapaadr@gmail.com
+Licencia Creative Commons CC BY-SA*/
 #include "Queue.h"
 void Leer(FILE*);
 void AFD(Cola,Cola2,Cola);
 void Cadenas(Cola,Cola2,Cola,Elem);
 void Tran(Cola,Cola2,Cola,Elem,Elem,Elem,Elem,Elem,Elem);
 
+/*Función que permite la lectura del archivo txt para crear el AFD a partir de una
+estructura de datos de tipo Cola (FIFO)*/
 void Leer(FILE *f){
 	int ini=0,dat=0,sigg=0
 	,i,j,coun=0,ban=0,num;
@@ -14,6 +17,7 @@ void Leer(FILE *f){
 	Elem inicio,dato,siguiente,centinela;
 	Cola a=nueva(),b=nueva(),e=nueva();
 	Cola2 d=nueva2();
+	/*Ciclo de lectura del txt*/
 	while(fscanf(f,"%s",c)!=EOF){
 		pal=(char*)malloc(sizeof(char)*1000);
 		strcpy(pal,c);
@@ -28,6 +32,7 @@ void Leer(FILE *f){
 	inicio=Elemnuevo2();
 	dato=Elemnuevo2();
 	siguiente=Elemnuevo2();
+	/*Creacion de las transiciones que necesita cada conjunto de estados del AFD*/
 	for(i=0;i!=num;i++){
 		centinela=primero(b);
 		for(j=0;j!=tamElem(primero(b));j++){
@@ -68,6 +73,7 @@ void Leer(FILE *f){
 	AFD(a,d,e);
 }
 
+/*Función que imprime en un formato bonito (en Linux) el AFD para despues trabajar con el*/
 void AFD(Cola a,Cola2 b,Cola c){
 	int i,j=0;
 	Elem alf,cen;
@@ -91,12 +97,14 @@ void AFD(Cola a,Cola2 b,Cola c){
 	Cadenas(a,b,c,alf);
 }
 
+/*Función que permite la lectura de una cadena de texto para trabajar en el AFD*/
 void Cadenas(Cola a,Cola2 b,Cola c,Elem e){
-	Elem cad;
+	Elem cad,efinal2;
 	int ban1=0,i,j;
 	cad=(Elem)malloc(sizeof(char)*1000);
 	printf("Ingresa una cadena para el AFD:\n");
 	fgets(cad,1000,stdin);
+	/*Ciclo que investiga en la cadena si esta dentro del alfabeto todas las letras que ingresa*/
 	for(i=0;i!=tamElem(cad);i++){
 		if(ban1==1){
 			printf("Los caracteres que ingreso no son validos en el alfabeto del AFD\n");
@@ -120,10 +128,33 @@ void Cadenas(Cola a,Cola2 b,Cola c,Elem e){
 	estado=primero(desformar(desformar(d)));
 	d=estadoFinal(a,0);
 	efinal=primero(d);
-	Tran(a,b,c,e,cad,estado,caractes,siguientes,efinal);
-
+	j=0;
+	/*Bandera que permite saber si exite más de un estado final*/
+	ban1=ElemComa(efinal);
+	if(ban1==0){
+		printf("Estado final: %s\n", efinal);
+		Tran(a,b,c,e,cad,estado,caractes,siguientes,efinal);
+	}else{
+		efinal2=(Elem)malloc(sizeof(char)*tamElem(efinal));
+		for(i=0;i!=tamElem(efinal);i++){
+			if(*(efinal+i)==','){
+				*(efinal2+j+1)='\0';
+				printf("Estado final: %s\n", efinal2);
+				Tran(a,b,c,e,cad,estado,caractes,siguientes,efinal2);
+				*efinal2='\0';
+				j=0;
+			}else{
+				*(efinal2+j)=*(efinal+i);
+				j++;
+			}
+		}
+		*(efinal2+j+1)='\0';
+		printf("Estado final: %s\n", efinal2);
+		Tran(a,b,c,e,cad,estado,caractes,siguientes,efinal2);
+	}
 }
 
+/*Función que realiza las transiciones de forma recursiva de la cadena en el AFD*/
 void Tran(Cola a,Cola2 b,Cola c,Elem e,Elem cad,Elem estado,Elem caracteres,Elem siguientes,Elem efinal){
 	caracteres=Elemnuevo2();
 	siguientes=Elemnuevo2();
@@ -133,6 +164,8 @@ void Tran(Cola a,Cola2 b,Cola c,Elem e,Elem cad,Elem estado,Elem caracteres,Elem
 	centinela->ult=b->ult;
 	Elem a1=Elemnuevo2(),b1=Elemnuevo2(),c1=Elemnuevo2(),sigui;
 	Cola d=nueva(),cen=nueva();
+	/*Ciclo que permite jalar los estados siguientes a los que trabaja el estado inicial que contiene
+	un ejemplo es decir que el estado 0 apunta a los estados 0,1,2 y de este modo permite saber que caracter sigue*/
 	for(i=0;i!=tamCola2(b);i++){
 		a1=primero2(centinela);
 		b1=siguiente(centinela);
@@ -171,6 +204,7 @@ void Tran(Cola a,Cola2 b,Cola c,Elem e,Elem cad,Elem estado,Elem caracteres,Elem
 		sigui=primero(d);
 		if(*(caracteres+i)==*(cad)){
 			printf("%s(%c)->%s,",estado,*cad,primero(d));
+			/*Llamo recursivamente a la funcion para seguir con los demas caminos del AFD*/
 			Tran(a,Armar(cen,tamCola(a)-4),c,e,cad+1,sigui,caracteres,siguientes,efinal);
 		}else{
 		}
@@ -188,5 +222,4 @@ void Tran(Cola a,Cola2 b,Cola c,Elem e,Elem cad,Elem estado,Elem caracteres,Elem
 		}else{
 		}
 	}
-	
 }
