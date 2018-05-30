@@ -1,28 +1,20 @@
 /*Creado por Adrian González Pardo
-Fecha de modificación: 21/05/2018
+Fecha de modificación: 29/05/2018
 Correo electronico:gozapaadr@gmail.com
 Licencia Creative Commons CC BY-SA*/
 #include "ListH.h"
 /*Creación del menu para el diccionario*/
 void Menu(TablaH t){
-  char d;
-  int i,j=counH(t);
-  TablaH t1=(TablaH)malloc(sizeof(struct Nodo2));
+  char *a,key;
+  Lista l;
+  TablaH t1=vaciaH();
   t1->li=tabla(t);
-  t1->key=llave(t);
-  t1->sigu=restoH(t);
-  printf("Menu se acaba de leer un diccionario de acuerdo a los resultados se presentan las siguientes llaves de acceso para trabajar\n");
-  impLlaves(t,0,counH(t));
-  printf("Ingresa la letra con la que deseas trabajar\n");
-  scanf("%c",&d);
-  for(i=0;i!=j;i++){
-    if(llave(t1)==d){
-      impLista(tabla(t1));
-      puts("");
-      break;
-    }
-    t1=restoH(t1);
-  }
+  a=(char*)malloc(sizeof(char)*20);
+  printf("Se acaba de leer un diccionario de la tabla periodica por favor ingresa el elemento que deseas obtener información\n");
+  scanf("%s",a);
+  a=toUCase(a);
+  key=keys(a,strlen(a));
+
 }
 /*Función que lee el txt*/
 void Leer(){
@@ -34,6 +26,7 @@ void Leer(){
   while(fscanf(r,"%s",cad)!=EOF){
     c=(Elem)malloc(sizeof(char)*1000);
     strcpy(c,cad);
+    c=toUCase(c);
     l=InsOrd(c,l);
   }
   l=invierte(l);
@@ -42,8 +35,7 @@ void Leer(){
     c=(Elem)malloc(sizeof(char)*1000);
     strcpy(c,cabeza(l));
     key=(Elem)malloc(sizeof(char));
-    *key=*c;
-    *key=toupper(*key);
+    *key=keys(c,paren(c));
     t=consH(t,*key,c);
     l=resto(l);
   }

@@ -56,3 +56,11 @@ Lista InsOrd(Elem e,Lista l){
 Lista OrdList(Lista l){
 	return (esVacia(l))?(l):(InsOrd(cabeza(l),OrdList(resto(l))));
 }
+
+/*Función recursiva que permite imprimir los elementos de forma lineal*/
+void impLista1(Lista l){
+  if(!esVacia(l)){
+    impLista1(resto(l));
+    impElem2(cabeza(l));
+  }
+}

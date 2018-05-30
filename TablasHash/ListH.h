@@ -1,5 +1,5 @@
 /*Creado por Adrian González Pardo
-Fecha de modificación: 21/05/2018
+Fecha de modificación: 29/05/2018
 Correo electronico:gozapaadr@gmail.com
 Licencia Creative Commons CC BY-SA*/
 #include "Lista.h"
@@ -65,7 +65,7 @@ TablaH consH(TablaH t,char k,char *info){
 /*Función que imprime las llaves de la Tabla Hash*/
 void impLlaves(TablaH t,int con,int lim){
   if(!esVaciaH(t)){
-    printf("%c",llave(t));
+    printf("%d",llave(t));
     printf("%s",(!esIgual(con+1,lim))?",":"");
     impLlaves(restoH(t),con+1,lim);
   }else{
@@ -79,5 +79,13 @@ void impTablaH(TablaH t,int i){
     impLista(tabla(t));
     printf("\n");
     impTablaH(restoH(t),i+1);
+  }
+}
+/*Función que imprime la tabla de una forma diferente*/
+void impTablaH1(TablaH t){
+  if(!esVaciaH(t)){
+    impLista1(tabla(t));
+    puts("");
+    impTablaH1(restoH(t));
   }
 }
