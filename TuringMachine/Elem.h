@@ -6,11 +6,11 @@
              Licencia Creative Commons CC BY-SA*/
 #include "Color.h"
 typedef char Elem;
+typedef char* Elem1;
 void impElem(Elem e){printf("%c\n",e);}
 void impElemColor(Elem e,char *color){printf("%s|%c|%s",color,e,KNRM);}
 int isEquals(int a,int b){return a==b;}
 int lenCad(char *c){return (*c)?(1+lenCad(c+1)):(0);}
-typedef char* Elem1;
 void impElem1(Elem1 e){printf("%s\n",e);}
 void impElem2(Elem1 e){printf("%s",e);}
 Elem1 sinComa(Elem1 e){
@@ -44,3 +44,5 @@ int valCad(char *lenguaje,char *cadena){
   }
   return 0;
 }
+int isElemEquals(Elem1 e,Elem1 e1){return (strcmp(e,e1))==0;}
+int isCharEquals(char a,char b){return a==b;}

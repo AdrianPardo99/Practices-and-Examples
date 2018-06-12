@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 #include "Logica.h"
 int main(){
   /*Lectura de archivo txt donde este contiene la configuración de la Maquina de Turing
@@ -18,6 +19,6 @@ int main(){
     5.- B <- Símbolo de espacio en blanco
     6.- F <- Estados Final de la Maquina de Turing
     7.- δ <- Transiciones de la Maquina de Turing*/
-  Lee();
+  Lee("Turing4.txt");
   return 0;
 }

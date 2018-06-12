@@ -60,3 +60,8 @@ void impToTM(ListaD l,int pos,int coun){
 }
 /*Función que cuenta el tamaño de la Lista Doblemente Enlazada*/
 int counD(ListaD l){return (!isNewD(l))?(1+counD(restoD(l))):(0);}
+/*Función que modifica la cabeza de la Lista Doblemente Enlazada*/
+ListaD change(Elem e,ListaD l){
+  l->el=e;
+  return l;
+}

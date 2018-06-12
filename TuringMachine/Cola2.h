@@ -4,7 +4,6 @@
              Fecha de modificación: 10/06/2018
              2CV1
              Licencia Creative Commons CC BY-SA*/
-typedef char* Elem1;
 /*Creación de una estructura de datos de tipo Cola como auxiliar a la Cola principal*/
 typedef struct Nodo2{
 	Elem1 inicio,dato,siguiente,escribe,pos;
