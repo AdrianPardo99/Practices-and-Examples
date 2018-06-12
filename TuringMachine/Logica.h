@@ -1,20 +1,40 @@
 /*Creado por Adrian González Pardo
              Israel Bahena Brito
-             Luis García
+             José Luis García Mendoza
+             Suarez Vazquez Erick
              Fecha de modificación: 10/06/2018
              2CV1
              Licencia Creative Commons CC BY-SA*/
 #include "Elem.h"
 #include "Queue.h"
 #include "ListaD.h"
+/*Función que realizara el recorrido de la cinta de la Máquina de Turing*/
 void proceso(Cola,char*,char*,Cola2,char*);
+/*Función que muestra la configuración de la Máquina de Turing*/
 void muestraTM(Cola,char*,char*,char*,Cola2);
+/*Función que lee el archivo txt de la configuración para la Máquina*/
 void Lee(char *dir){
+  if(isElemEquals(dir,"Turing1.txt")){
+    puts("La siguiente máquina maneja el lenguaje: (01)*0");
+  }else if(isElemEquals(dir,"Turing2.txt")){
+    puts("La siguiente máquina maneja el lenguaje: 0*1+");
+  }else if(isElemEquals(dir,"Turing3.txt")){
+    puts("La siguiente máquina maneja el lenguaje: 01*");
+  }else if(isElemEquals(dir,"Turing4.txt")){
+    puts("La siguiente máquina maneja el lenguaje: (0)^n(1)^n | n>0");
+  }else if(isElemEquals(dir,"Turing5.txt")){
+    puts("La siguiente máquina maneja el lenguaje: (1*01*0)*");
+  }
   FILE *out=fopen(dir,"r");
+  if(out==NULL){
+    puts("Error al leer el archivo txt. Saliendo del programa...");
+    exit(1);
+  }
   char lec[100],*pal,*lenguaje,*efinal,*inicial;
   Cola c1=nueva(),c2=nueva(),cen=nueva(),fin=nueva(),init=nueva();
   Cola2 p=nueva2();
   int coun=0,i,j,k,l,in,da,si,es,pa;
+  /*Ciclo que lee el txt y lo agrega a la Cola*/
   while(fscanf(out,"%s",lec)!=EOF){
     pal=(char*)malloc(sizeof(char)*100);
     strcpy(pal,lec);
@@ -43,19 +63,18 @@ void Lee(char *dir){
 void muestraTM(Cola TM,char* lenguaje,char* efinal,char* inicial,Cola2 T){
   int ban=0;
   char *cad;
-  puts("Maquina de Turing:");
+  puts("Máquina de Turing:");
   impCola(TM,0);
   puts("Transiciones:");
   impCola2(T);
   puts("Ingresa una cadena para trabajar:");
   cad=(char*)malloc(sizeof(char)*100);
+  fflush(stdin);
   fgets(cad,100,stdin);
   ban=valCad(lenguaje,cad);
   (!ban)?(printf("Cadena que usa el lengujes\nIniciando proceso...\n")):(printf("Cadena invalida\n"
   "Los caracteres que ingreso no pertenecen al lenguaje que esta colocado\n"));
   (!ban)?(proceso(TM,efinal,inicial,T,cad)):(exit(1));
-  //estados finales
-
 }
 void proceso(Cola TM,char *efinal,char *inicial,Cola2 T,char *cadena){
   char *cab,*ch;
@@ -88,12 +107,13 @@ void proceso(Cola TM,char *efinal,char *inicial,Cola2 T,char *cadena){
   puts("\n");
   sleep(1);
   /*Cola2
-  inicio()->Estado en el que estados
-  dato()->El caracter que se encuentra en la cinta
-  siguiente()->El siguiente estado en el que se modifica
-  escribe()->Escribe en la cinta
-  pos()->Posicion a la que pasa la cinta
+    inicio()->Estado en el que estados
+    dato()->El caracter que se encuentra en la cinta
+    siguiente()->El siguiente estado en el que se modifica
+    escribe()->Escribe en la cinta
+    pos()->Posicion a la que pasa la cinta
   */
+  /*Proceso en el que analísa si el cabezal en el que esta es valido en la configuración*/
   while (!esnueva2(T1)) {
     if(isElemEquals(inicial,inicio(T1))){
       *cab=cabezaD(l1);
@@ -124,7 +144,6 @@ void proceso(Cola TM,char *efinal,char *inicial,Cola2 T,char *cadena){
   if(isElemEquals(inicial,efinal)){
     printf("Cadena valida\n");
   }else{
-
     printf("Cadena invalida\n");
   }
 }

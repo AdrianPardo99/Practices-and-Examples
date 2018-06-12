@@ -1,6 +1,7 @@
 /*Creado por Adrian González Pardo
              Israel Bahena Brito
-             Luis García
+             José Luis García Mendoza
+             Suarez Vazquez Erick
              Fecha de modificación: 10/06/2018
              2CV1
              Licencia Creative Commons CC BY-SA*/

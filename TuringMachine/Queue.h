@@ -1,11 +1,14 @@
 /*Creado por Adrian González Pardo
              Israel Bahena Brito
-             Luis García
+             José Luis García Mendoza
+             Suarez Vazquez Erick
              Fecha de modificación: 10/06/2018
              2CV1
              Licencia Creative Commons CC BY-SA*/
 #include "Cola.h"
 #include "Cola2.h"
+/*Función para avanzar la estructura y despues se crean las Transiciones en la
+  segunda Cola*/
 Cola avanza(Cola c){
   int i;
   Cola c1=(Cola)malloc(sizeof(struct CNodo));
@@ -15,6 +18,7 @@ Cola avanza(Cola c){
   c1=desformar(c1);
   return c1;
 }
+/*Función que crea el apartado de las Transiciones de la Máquina de Turing*/
 Cola2 crea(Cola c2){
   Cola2 p=nueva2();
   char *pal,*pal1,*pal2,*pal3,*pal4,inicio[20],dato[20],
