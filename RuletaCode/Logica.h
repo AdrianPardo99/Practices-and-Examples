@@ -14,8 +14,8 @@ void again(int di){
 		printf("Ingresa de nuevo un monto para jugar\n");
 		scanf("%d",&di);
 	}
-	printf("Ingresa el tipo de apuesta que deseas realizar\n1.-Rojo/Negro\n2.-Par/Impar\n"
-	"3.-Pasa/Falta\n4.-Docena\n5.-Columna\n6.-Pleno\n");
+	printf("Ingresa el tipo de apuesta que deseas realizar,\nprimer dato es el numero de fichas que ingresa\nel segundo es en caso de ganar el numero de fichas por las que se multiplica\n1.-Rojo/Negro 1x1\n2.-Par/Impar 1x1\n"
+	"3.-Pasa/Falta 1x1\n4.-Docena 1x2\n5.-Columna 1x2\n6.-Pleno 1x35\n");
 	scanf("%d",&ti);
 	printf("¿A que numero le apuestas?\nIngresa del 1-36\n");
 	scanf("%d",&d);
@@ -48,8 +48,8 @@ void logica(){
 	for(i=0;i!=37;i++){
 		q=formar(q,i);
 	}
-	printf("Ingresa el tipo de apuesta que deseas realizar\n1.-Rojo/Negro\n2.-Par/Impar\n"
-	"3.-Pasa/Falta\n4.-Docena\n5.-Columna\n6.-Pleno\n");
+	printf("Ingresa el tipo de apuesta que deseas realizar,\nprimer dato es el numero de fichas que ingresa\nel segundo es en caso de ganar el numero de fichas por las que se multiplica\n1.-Rojo/Negro 1x1\n2.-Par/Impar 1x1\n"
+	"3.-Pasa/Falta 1x1\n4.-Docena 1x2\n5.-Columna 1x2\n6.-Pleno 1x35\n");
 	scanf("%d",&ti);
 	printf("¿Cuanto dinero quieres apostar?\n");
 	scanf("%d",&di);
