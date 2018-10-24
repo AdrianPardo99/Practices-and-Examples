@@ -1,10 +1,8 @@
 /*Creado por Adrian González Pardo
-             Israel Bahena Brito
-             José Luis García Mendoza
-             Suarez Vazquez Erick
-             Fecha de modificación: 10/06/2018
-             2CV1
-             Licencia Creative Commons CC BY-SA*/
+  Contacto: gozapaadr@gmail.com
+  Nickname: DevCrack
+  Fecha de modificación: 23/10/2018
+  Licencia Creative Commons CC BY-SA*/
 /*Creación de una estructura de datos de tipo Cola como auxiliar a la Cola principal*/
 typedef struct Nodo2{
 	Elem1 inicio,dato,siguiente,escribe,pos;
@@ -80,6 +78,30 @@ void impCola2(Cola2 q){
 		impCola2(desformar2(t));
 	}
 }
+
+Elem1 impTransicion(Cola2 q){
+	Elem1 t=(Elem1)malloc(sizeof(char)*40);
+	Elem1 i=inicio(q);
+	Elem1 d=dato(q);
+	Elem1 s=siguiente(q);
+	Elem1 e=escribe(q);
+	Elem1 p=pos(q);
+	Elem1 ci=")";
+	strcat(t,"(");
+	strcat(t,i);
+	strcat(t,",");
+	strcat(t,d);
+	strcat(t,")->(");
+	strcat(t,s);
+	strcat(t,",");
+	strcat(t,e);
+	strcat(t,",");
+	strcat(t,p);
+	strcat(t,ci);
+
+	return t;
+}
+
 int tamCola2(Cola2 q){
 	Cola2 t=(Cola2)malloc(sizeof(struct CNodo2));
 	t->prim=q->prim;

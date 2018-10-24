@@ -5,6 +5,7 @@
              Fecha de modificación: 10/06/2018
              2CV1
              Licencia Creative Commons CC BY-SA*/
+/*Creación de cabecera de colores para distintos usos*/
 #define KNRM  "\x1B[0m"
 #define KRED  "\x1B[31m"
 #define KGRN  "\x1B[32m"

@@ -1,10 +1,8 @@
 /*Creado por Adrian González Pardo
-             Israel Bahena Brito
-             José Luis García Mendoza
-             Suarez Vazquez Erick
-             Fecha de modificación: 10/06/2018
-             2CV1
-             Licencia Creative Commons CC BY-SA*/
+  Contacto: gozapaadr@gmail.com
+  Nickname: DevCrack
+  Fecha de modificación: 23/10/2018
+  Licencia Creative Commons CC BY-SA*/
 typedef struct LENodo{
   Elem el;
   struct LENodo *ant;

@@ -1,13 +1,11 @@
 /*Creado por Adrian González Pardo
-             Israel Bahena Brito
-             José Luis García Mendoza
-             Suarez Vazquez Erick
-             Fecha de modificación: 10/06/2018
-             2CV1
-             Licencia Creative Commons CC BY-SA*/
+  Contacto: gozapaadr@gmail.com
+  Nickname: DevCrack
+  Licencia Creative Commons CC BY-SA*/
 #include "Elem.h"
 #include "Queue.h"
 #include "ListaD.h"
+#include "Stack.h"
 /*Función que realizara el recorrido de la cinta de la Máquina de Turing*/
 void proceso(Cola,char*,char*,Cola2,char*);
 /*Función que muestra la configuración de la Máquina de Turing*/
@@ -60,6 +58,7 @@ void Lee(char *dir){
   p=crea(c2);
   muestraTM(c1,lenguaje,efinal,inicial,p);
 }
+/*Funcion que muestra la configuracion de la maquina de Turing*/
 void muestraTM(Cola TM,char* lenguaje,char* efinal,char* inicial,Cola2 T){
   int ban=0;
   char *cad;
@@ -72,11 +71,14 @@ void muestraTM(Cola TM,char* lenguaje,char* efinal,char* inicial,Cola2 T){
   fflush(stdin);
   fgets(cad,100,stdin);
   ban=valCad(lenguaje,cad);
-  (!ban)?(printf("Cadena que usa el lengujes\nIniciando proceso...\n")):(printf("Cadena invalida\n"
-  "Los caracteres que ingreso no pertenecen al lenguaje que esta colocado\n"));
+  (!ban)?(printf("Cadena que usa el lenguaje\nIniciando proceso...\n")):
+  (printf("Cadena invalida\nLos caracteres que ingreso no pertenecen al
+  lenguaje que esta colocado\n"));
   (!ban)?(proceso(TM,efinal,inicial,T,cad)):(exit(1));
 }
+/*Funcion que realiza las transiciones y la animacion del cabeza de la maquina*/
 void proceso(Cola TM,char *efinal,char *inicial,Cola2 T,char *cadena){
+  Stack s=newStack();
   char *cab,*ch;
   cab=(char*)malloc(sizeof(char));
   ListaD l=vaciaD(),l1=(ListaD)malloc(sizeof(struct LENodo));
@@ -89,7 +91,7 @@ void proceso(Cola TM,char *efinal,char *inicial,Cola2 T,char *cadena){
   for(i=0;i!=3;i++){
     l=consD('B',l);
   }
-  j=tamCad(cadena);
+  j=lenCad(cadena);
   for(i=0;i!=j-1;i++){
     l=consD(*(cadena+i),l);
   }
@@ -106,14 +108,15 @@ void proceso(Cola TM,char *efinal,char *inicial,Cola2 T,char *cadena){
   impToTM(l,j,0);
   puts("\n");
   sleep(1);
+  Elem1 transicion;
   /*Cola2
     inicio()->Estado en el que estados
     dato()->El caracter que se encuentra en la cinta
     siguiente()->El siguiente estado en el que se modifica
     escribe()->Escribe en la cinta
     pos()->Posicion a la que pasa la cinta
-  */
-  /*Proceso en el que analísa si el cabezal en el que esta es valido en la configuración*/
+
+  Proceso en el que analísa si el cabezal en el que esta es valido en la configuración*/
   while (!esnueva2(T1)) {
     if(isElemEquals(inicial,inicio(T1))){
       *cab=cabezaD(l1);
@@ -129,10 +132,14 @@ void proceso(Cola TM,char *efinal,char *inicial,Cola2 T,char *cadena){
         }else if(isElemEquals(pos(T1),"L")){
           l1=anteriorD(l1);
         }
+        s=push(s,impTransicion(T1));
+        printTranStack(s);
+        puts("");
         T1=crea(avanza(TM));
         j=counD(l)-counD(l1);
         impToTM(l,j,0);
         puts("\n");
+        //printf("\033[H\033[J");
         sleep(1);
       }else{
         T1=desformar2(T1);
